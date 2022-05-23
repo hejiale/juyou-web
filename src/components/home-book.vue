@@ -13,7 +13,6 @@
         :action="$config.uploadUrl()"
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload"
       >
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -42,28 +41,28 @@ export default {
       this.imageUrl = URL.createObjectURL(file.raw);
       console.log(res.data.fileUrl)
     },
-    beforeAvatarUpload(file) {
-      const imgTypeArr = ["image/png", "image/jpg", "image/jpeg"];
-      const allowImgType = imgTypeArr.includes(file.type);
-      const isLt10M = file.size / 1024 / 1024 < 2;
+    // beforeAvatarUpload(file) {
+    //   const imgTypeArr = ["image/png", "image/jpg", "image/jpeg"];
+    //   const allowImgType = imgTypeArr.includes(file.type);
+    //   const isLt10M = file.size / 1024 / 1024 < 2;
     
-      if (!allowImgType) {
-        this.$message.error("只能上传png,jpg,jpeg格式的图片");
-        return false;
-      }
-      if (!isLt10M) {
-        this.$message.error("大小不能超过 2MB!");
-        return false;
-      }
-      // jfif pjp pjpeg 格式会被校验为 image/jpeg
-      let isjfif = file.name.slice(-5) === ".jfif";
-      let ispjp = file.name.slice(-4) === ".pjp";
-      let ispjpeg = file.name.slice(-6) === ".pjpeg";
-      if (isjfif || ispjp || ispjpeg) {
-        this.$message.error("只能上传png,jpg,jpeg格式的图片");
-        return false;
-      }
-    },
+    //   if (!allowImgType) {
+    //     this.$message.error("只能上传png,jpg,jpeg格式的图片");
+    //     return false;
+    //   }
+    //   if (!isLt10M) {
+    //     this.$message.error("大小不能超过 2MB!");
+    //     return false;
+    //   }
+    //   // jfif pjp pjpeg 格式会被校验为 image/jpeg
+    //   let isjfif = file.name.slice(-5) === ".jfif";
+    //   let ispjp = file.name.slice(-4) === ".pjp";
+    //   let ispjpeg = file.name.slice(-6) === ".pjpeg";
+    //   if (isjfif || ispjp || ispjpeg) {
+    //     this.$message.error("只能上传png,jpg,jpeg格式的图片");
+    //     return false;
+    //   }
+    // },
   },
 };
 </script>

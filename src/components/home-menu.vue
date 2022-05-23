@@ -1,7 +1,7 @@
 <template>
   <div class="top">
     <div class="logoBox">
-      <img src="../assets/logo.png" alt="" class="logoImg" />
+      <img src="../assets/logo.png" alt="" class="logoImg" mode="aspectFill"/>
       <!-- <span class="title">剧游宇宙</span> -->
     </div>
     <div class="menuBar">

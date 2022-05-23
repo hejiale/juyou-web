@@ -11,7 +11,7 @@
         class="productItem"
         :style="index === 0 ? 'margin-right:200px;' : ''"
       >
-        <img src="" alt="" class="productImg" />
+        <img src="../assets/product.png" alt="" class="productImg" mode="aspectFill"/>
         <span class="productTitle">天津雪人剧制悦游谷体验券</span>
         <span class="productPrice"
           >¥<span class="productPriceValue">168</span
@@ -27,8 +27,14 @@ export default {
   data() {
     return {
       products: ["", ""],
+      lastIp: ""
     };
   },
+  mounted(){
+      this.lastIp = sessionStorage.getItem('ip')
+  },
+  methods: {
+  }
 };
 </script>
 <style scoped>
