@@ -1,13 +1,13 @@
 <template>
   <div class="content">
     <div class="inputPhoneBox">
-      <el-input placeholder="请输入您的手机号码"></el-input>
-      <div class="inputSure">确认</div>
+      <el-input placeholder="请输入您的手机号码" v-model="telPhone"></el-input>
+      <div class="inputSure" @click="getUserId">确认</div>
     </div>
     <div class="productsBox">
       <div
-        v-for="(it, index) in products"
-        :key="it"
+        v-for="(it, index) in 2"
+        :key="index"
         class="productItem"
         :style="index === 0 ? 'margin-right:200px;' : ''"
       >
@@ -26,43 +26,72 @@
       </div>
     </div>
     <div class="code-pop" v-if="showPayCode" @click="showPayCode = false">
-      <div ref="qrcode" class="codeImg"></div>
+      <div class="code-content">
+        <div ref="qrcode" class="codeImg"></div>
+        <span class="codeTitle">请使用支付宝扫码支付</span>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import QRCode from 'qrcodejs2'
+import QRCode from "qrcodejs2";
 export default {
-  components: {
-  },
+  components: {},
   data() {
     return {
-      products: ["", ""],
       lastIp: "",
-      showPayCode: false
+      showPayCode: false,
+      telPhone: "",
+      userId: "",
     };
   },
   mounted() {
     this.lastIp = sessionStorage.getItem("ip");
   },
   methods: {
-    onBuy() {
-      this.showPayCode = true;
-      this.$nextTick(() => {
-        this.creatQrCode();
-      })
-      
+    async getUserId() {
+      if (!this.telPhone.length) {
+        this.$message.error("请输入手机号!");
+        return;
+      }
+      let res = await this.$api.userGetUserByPhone({
+        phone: this.telPhone,
+      });
+      if (res.id) {
+        this.userId = res.id;
+      } else {
+        this.$message.error("未查询到用户信息!");
+      }
     },
-    creatQrCode() {
-        this.qrcode = new QRCode(this.$refs.qrcode, {
+    async onBuy() {
+      if (!this.telPhone.length) {
+        this.$message.error("请输入手机号!");
+        return;
+      }
+      let res = await this.$api.payBuyProductWithHome({
+        userId: this.userId,
+        money: 16800,
+        userIp: this.lastIp,
+        productStatus: "XUE_CODE",
+      });
+      this.showPayCode = true;
+
+      if (res.aliH5PayUrl) {
+        this.$nextTick(() => {
+          this.creatQrCode(res.aliH5PayUrl);
+        });
+      }
+    },
+    creatQrCode(url) {
+      this.qrcode = new QRCode(this.$refs.qrcode, {
         width: 150, // 二维码宽度
         height: 150, // 二维码高度
-        text: '123',
-        background: '#ffffff', // 二维码的后景色
-        foreground: '#000000', // 二维码的前景色
-        correctLevel: QRCode.CorrectLevel.H
-      })
-    }
+        text: url,
+        background: "#ffffff", // 二维码的后景色
+        foreground: "#000000", // 二维码的前景色
+        correctLevel: QRCode.CorrectLevel.H,
+      });
+    },
   },
 };
 </script>
@@ -170,13 +199,25 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.codeImg {
-  width: 200px;
-  height: 200px;
+.code-content{
+  width: 300px;
+  height: 300px;
   background: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+  flex-direction: column;
+  align-items: center;
+}
+.codeImg {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.codeTitle {
+  margin-top: 30px;
 }
 </style>

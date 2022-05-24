@@ -21,12 +21,14 @@
         class="iosCodeBox"
         v-show="showIosCode"
         @mouseleave="showIosCode = false"
-      ></div>
+      >
+      <img src="../assets/ios.png" alt=""></div>
       <div
         class="androidCodeBox"
         v-show="showAndroidCode"
         @mouseleave="showAndroidCode = false"
-      ></div>
+      >
+      <img src="../assets/andriod.png" alt=""></div>
     </div>
   </div>
 </template>
@@ -87,5 +89,9 @@ export default {
   z-index: 1;
   background: #fff;
   margin-right: 30px;
+}
+img{
+  width: 100%;
+  height: 100%;
 }
 </style>

@@ -3,7 +3,7 @@
     <span class="title">商户入驻</span>
     <div class="inputBox">
       <span class="inputTitle">店铺名称：</span>
-      <el-input class="input"></el-input>
+      <el-input class="input" v-model="name"></el-input>
     </div>
     <div class="inputBox">
       <span class="inputTitle">店铺LOGO：</span>
@@ -13,6 +13,7 @@
         :action="$config.uploadUrl()"
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
+        ref="poster-cover"
       >
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -20,13 +21,13 @@
     </div>
     <div class="inputBox">
       <span class="inputTitle">联系电话：</span>
-      <el-input class="input"></el-input>
+      <el-input class="input" v-model="phone"></el-input>
     </div>
     <div class="inputBox">
       <span class="inputTitle">联系人：</span>
-      <el-input class="input"></el-input>
+      <el-input class="input" v-model="username"></el-input>
     </div>
-    <div class="submitBox">提交</div>
+    <div class="submitBox" @click="onSubmit">提交</div>
   </div>
 </template>
 <script>
@@ -34,6 +35,9 @@ export default {
   data() {
     return {
       imageUrl: "",
+      name: '',
+      phone: '',
+      username:''
     };
   },
   methods: {
@@ -41,6 +45,13 @@ export default {
       this.imageUrl = URL.createObjectURL(file.raw);
       console.log(res.data.fileUrl)
     },
+    onSubmit(){
+      // this.name = "";
+      // this.phone = "";
+      // this.username = "";
+      // this.$refs["poster-cover"].setFileList();
+      this.$message.success("提交成功!");
+    }
     // beforeAvatarUpload(file) {
     //   const imgTypeArr = ["image/png", "image/jpg", "image/jpeg"];
     //   const allowImgType = imgTypeArr.includes(file.type);
