@@ -11,30 +11,59 @@
         class="productItem"
         :style="index === 0 ? 'margin-right:200px;' : ''"
       >
-        <img src="../assets/product.png" alt="" class="productImg" mode="aspectFill"/>
+        <img
+          src="../assets/product.png"
+          alt=""
+          class="productImg"
+          mode="aspectFill"
+        />
         <span class="productTitle">天津雪人剧制悦游谷体验券</span>
         <span class="productPrice"
           >¥<span class="productPriceValue">168</span
           ><span class="productPriceNum">/位</span></span
         >
-        <div class="productBuy">购买</div>
+        <div class="productBuy" @click="onBuy">购买</div>
       </div>
+    </div>
+    <div class="code-pop" v-if="showPayCode" @click="showPayCode = false">
+      <div ref="qrcode" class="codeImg"></div>
     </div>
   </div>
 </template>
 <script>
+import QRCode from 'qrcodejs2'
 export default {
+  components: {
+  },
   data() {
     return {
       products: ["", ""],
-      lastIp: ""
+      lastIp: "",
+      showPayCode: false
     };
   },
-  mounted(){
-      this.lastIp = sessionStorage.getItem('ip')
+  mounted() {
+    this.lastIp = sessionStorage.getItem("ip");
   },
   methods: {
-  }
+    onBuy() {
+      this.showPayCode = true;
+      this.$nextTick(() => {
+        this.creatQrCode();
+      })
+      
+    },
+    creatQrCode() {
+        this.qrcode = new QRCode(this.$refs.qrcode, {
+        width: 150, // 二维码宽度
+        height: 150, // 二维码高度
+        text: '123',
+        background: '#ffffff', // 二维码的后景色
+        foreground: '#000000', // 二维码的前景色
+        correctLevel: QRCode.CorrectLevel.H
+      })
+    }
+  },
 };
 </script>
 <style scoped>
@@ -128,5 +157,26 @@ export default {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+.code-pop {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.codeImg {
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 }
 </style>
