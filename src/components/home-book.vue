@@ -50,7 +50,7 @@ export default {
       // this.phone = "";
       // this.username = "";
       // this.$refs["poster-cover"].setFileList();
-      this.$message.success("提交成功!");
+      this.$message.success("商户入驻信息保存成功!");
     }
     // beforeAvatarUpload(file) {
     //   const imgTypeArr = ["image/png", "image/jpg", "image/jpeg"];

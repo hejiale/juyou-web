@@ -35,6 +35,7 @@
 </template>
 <script>
 import QRCode from "qrcodejs2";
+import { Loading } from "element-ui";
 export default {
   components: {},
   data() {
@@ -68,6 +69,8 @@ export default {
         this.$message.error("请输入手机号!");
         return;
       }
+      let loadingInstance = Loading.service({ fullscreen: true });
+      
       let res = await this.$api.payBuyProductWithHome({
         userId: this.userId,
         money: 16800,
@@ -75,6 +78,7 @@ export default {
         productStatus: "XUE_CODE",
       });
       this.showPayCode = true;
+      loadingInstance.close();
 
       if (res.aliH5PayUrl) {
         this.$nextTick(() => {
