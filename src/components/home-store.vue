@@ -4,6 +4,7 @@
       <el-input placeholder="请输入您的手机号码" v-model="telPhone"></el-input>
       <div class="inputSure" @click="getUserId">确认</div>
     </div>
+    <span v-if="userName" style="color:#5ec9c7;">查询到用户：{{userName}}</span>
     <div class="productsBox">
       <div
         v-for="(it, index) in 2"
@@ -44,6 +45,7 @@ export default {
       showPayCode: false,
       telPhone: "",
       userId: "",
+      userName: null
     };
   },
   mounted() {
@@ -60,6 +62,7 @@ export default {
       });
       if (res.id) {
         this.userId = res.id;
+        this.userName = res.nickName;
       } else {
         this.$message.error("未查询到用户信息!");
       }
@@ -73,7 +76,7 @@ export default {
       
       let res = await this.$api.payBuyProductWithHome({
         userId: this.userId,
-        money: 16800,
+        money: 168,
         userIp: this.lastIp,
         productStatus: "XUE_CODE",
       });
