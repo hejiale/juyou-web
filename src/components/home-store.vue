@@ -44,7 +44,7 @@
   </div>
 </template>
 <script>
-import QRCode from "qrcodejs2";
+import QRCode from "qrcodejs2-fix";
 import { Loading } from "element-ui";
 export default {
   components: {},
