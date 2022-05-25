@@ -50,15 +50,11 @@ export default {
   components: {},
   data() {
     return {
-      lastIp: "",
       showPayCode: false,
       telPhone: "",
       userId: "",
       userName: null
     };
-  },
-  mounted() {
-    this.lastIp = sessionStorage.getItem("ip");
   },
   methods: {
     async getUserId() {
@@ -86,8 +82,8 @@ export default {
       
       let res = await this.$api.payBuyProductWithHome({
         userId: this.userId,
-        money: 2,
-        userIp: this.lastIp,
+        money: 16800,
+        userIp: "172.168.1.1",
         productStatus: "XUE_CODE",
       });
       this.showPayCode = true;
