@@ -13,12 +13,21 @@
         :style="index === 0 ? 'margin-right:200px;' : ''"
       >
         <img
-          src="../assets/product.png"
+          src="../assets/product1.jpg"
           alt=""
           class="productImg"
           mode="aspectFill"
+          v-if="index === 0"
         />
-        <span class="productTitle">天津雪人剧制悦游谷体验券</span>
+        <img
+          src="../assets/product2.png"
+          alt=""
+          class="productImg"
+          mode="aspectFill"
+          v-else
+        />
+        <span class="productTitle" v-if="index === 0">天津雪人剧制悦游谷体验券</span>
+        <span class="productTitle" v-else>剧游宇宙App通用体验券</span>
         <span class="productPrice"
           >¥<span class="productPriceValue">168</span
           ><span class="productPriceNum">/位</span></span
@@ -76,7 +85,7 @@ export default {
       
       let res = await this.$api.payBuyProductWithHome({
         userId: this.userId,
-        money: 168,
+        money: 2,
         userIp: this.lastIp,
         productStatus: "XUE_CODE",
       });

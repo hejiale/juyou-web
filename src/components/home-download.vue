@@ -22,7 +22,7 @@
         v-show="showIosCode"
         @mouseleave="showIosCode = false"
       >
-      <img src="../assets/ios.png" alt=""></div>
+      <img src="../assets/ios.jpg" alt=""></div>
       <div
         class="androidCodeBox"
         v-show="showAndroidCode"

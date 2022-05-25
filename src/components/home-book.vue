@@ -2,11 +2,11 @@
   <div class="content">
     <span class="title">商户入驻</span>
     <div class="inputBox">
-      <span class="inputTitle">店铺名称：</span>
+      <span class="inputTitle"><span class="tag">*</span>店铺名称：</span>
       <el-input class="input" v-model="name"></el-input>
     </div>
     <div class="inputBox">
-      <span class="inputTitle">店铺LOGO：</span>
+      <span class="inputTitle"><span class="tag">*</span>店铺LOGO：</span>
       <el-upload
         accept="image/png,image/jpg,image/jpeg"
         class="avatar-uploader"
@@ -20,11 +20,11 @@
       </el-upload>
     </div>
     <div class="inputBox">
-      <span class="inputTitle">联系电话：</span>
+      <span class="inputTitle"><span class="tag">*</span>联系电话：</span>
       <el-input class="input" v-model="phone"></el-input>
     </div>
     <div class="inputBox">
-      <span class="inputTitle">联系人：</span>
+      <span class="inputTitle"><span class="tag">*</span>联系人：</span>
       <el-input class="input" v-model="username"></el-input>
     </div>
     <div class="submitBox" @click="onSubmit">提交</div>
@@ -50,7 +50,11 @@ export default {
       // this.phone = "";
       // this.username = "";
       // this.$refs["poster-cover"].setFileList();
-      this.$message.success("商户入驻信息保存成功!");
+      if(!this.name.length || !this.phone.length || !this.username.length || !this.imageUrl.length){
+        this.$message.error("请填写必填项内容")
+        return;
+      }
+      this.$message.success("已受理您的入驻请求，平台将于三个工作日内审核并与您联系!");
     }
     // beforeAvatarUpload(file) {
     //   const imgTypeArr = ["image/png", "image/jpg", "image/jpeg"];
@@ -140,5 +144,10 @@ export default {
   width: 178px;
   height: 178px;
   display: block;
+}
+.tag{
+  width: 2px;
+  height: 2px;
+  color: red;
 }
 </style>

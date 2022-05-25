@@ -17,9 +17,8 @@
       <homeBook v-if="activeIndex === 2"></homeBook>
       <homeStore v-if="activeIndex === 3"></homeStore>
       <img
-        src="../assets/backgournd4.jpg"
+        src="../assets/backgournd4.png"
         class="imageStyle"
-        mode="aspectFill"
         v-if="activeIndex === 4"
       />
       <homeBottom></homeBottom>
