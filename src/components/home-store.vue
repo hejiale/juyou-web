@@ -74,6 +74,7 @@ export default {
         this.userName = res.nickName;
       } else {
         this.$message.error("未查询到用户信息!");
+        this.userName = "";
       }
     },
     async onBuy() {

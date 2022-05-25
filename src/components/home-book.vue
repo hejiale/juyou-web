@@ -46,38 +46,12 @@ export default {
       console.log(res.data.fileUrl)
     },
     onSubmit(){
-      // this.name = "";
-      // this.phone = "";
-      // this.username = "";
-      // this.$refs["poster-cover"].setFileList();
       if(!this.name.length || !this.phone.length || !this.username.length || !this.imageUrl.length){
         this.$message.error("请填写必填项内容")
         return;
       }
       this.$message.success("已受理您的入驻请求，平台将于三个工作日内审核并与您联系!");
     }
-    // beforeAvatarUpload(file) {
-    //   const imgTypeArr = ["image/png", "image/jpg", "image/jpeg"];
-    //   const allowImgType = imgTypeArr.includes(file.type);
-    //   const isLt10M = file.size / 1024 / 1024 < 2;
-    
-    //   if (!allowImgType) {
-    //     this.$message.error("只能上传png,jpg,jpeg格式的图片");
-    //     return false;
-    //   }
-    //   if (!isLt10M) {
-    //     this.$message.error("大小不能超过 2MB!");
-    //     return false;
-    //   }
-    //   // jfif pjp pjpeg 格式会被校验为 image/jpeg
-    //   let isjfif = file.name.slice(-5) === ".jfif";
-    //   let ispjp = file.name.slice(-4) === ".pjp";
-    //   let ispjpeg = file.name.slice(-6) === ".pjpeg";
-    //   if (isjfif || ispjp || ispjpeg) {
-    //     this.$message.error("只能上传png,jpg,jpeg格式的图片");
-    //     return false;
-    //   }
-    // },
   },
 };
 </script>

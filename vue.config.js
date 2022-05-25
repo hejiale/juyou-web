@@ -8,8 +8,8 @@ module.exports = {
   publicPath: './',
   productionSourceMap: false,
   devServer: {
-    proxy: 'https://juyou-dev.yun-chang.com'
-    // proxy: 'https://www.juyyds.com'
+    // proxy: 'https://juyou-dev.yun-chang.com'
+    proxy: 'https://www.juyyds.com'
   },
   chainWebpack: config => {
     config.resolve.alias

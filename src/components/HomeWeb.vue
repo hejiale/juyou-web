@@ -9,7 +9,7 @@
         v-if="activeIndex === 0"
       />
       <img
-        src="../assets/backgournd3.jpg"
+        src="../assets/backgournd3.png"
         class="imageStyle"
         mode="aspectFill"
         v-if="activeIndex === 1"
